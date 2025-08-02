@@ -1,0 +1,6 @@
+const banks = [
+    'Access Bank', 'Citibank Nigeria', 'Diamond Bank', 'Ecobank Nigeria', 'Fidelity Bank',
+    'First Bank of Nigeria', 'Guaranty Trust Bank', 'Heritage Bank', 'Jaiz Bank', 'Keystone Bank',
+    'Lapo Microfinance Bank', 'Mainstreet Bank', 'Polaris Bank', 'Stanbic IBTC Bank', 'Sterling Bank',
+    'Union Bank', 'United Bank for Africa (UBA)', 'Wema Bank', 'Zenith Bank'
+  ]

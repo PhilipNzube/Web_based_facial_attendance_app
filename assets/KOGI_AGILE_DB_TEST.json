@@ -1,0 +1,518 @@
+[{
+  "_id": {
+    "$oid": "677dd986a255926f29c237a9"
+  },
+  "schoolId": {
+    "$oid": "676f4cb22b490484a5fa429f"
+  },
+  "surname": "Samson ",
+  "studentNin": "0999394929",
+  "ward": "AKPASU",
+  "otherNames": "Damilola",
+  "gender": "Female",
+  "dob": "2025-01-05",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "EDO",
+  "lga": "ESAN NORTH EAST",
+  "lgaOfEnrollment": "KOGI",
+  "communityName": "Felele",
+  "residentialAddress": "Lokoja",
+  "presentClass": "JSS 3",
+  "yearOfErollment": "2025",
+  "parentContact": "",
+  "parentOccupation": "Bricklayer",
+  "parentPhone": "0909090889",
+  "parentName": "Codebro",
+  "parentNin": "98798797908",
+  "bankName": "Jaiz Bank",
+  "accountNumber": "092830980980",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736268542/admin_passport/pn6ltstmddu3tn3vapcu.png",
+  "createdBy": {
+    "$oid": "677bd03ce7cabe382e503ab3"
+  },
+  "lastLogged": {
+    "$date": "2025-01-08T01:48:54.977Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T01:48:54.981Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T01:48:54.981Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677ddad0b44b8ebe9b96fa02"
+  },
+  "schoolId": {
+    "$oid": "677b43afe29daf8531d980ff"
+  },
+  "surname": "Debby Kue",
+  "studentNin": "980890809",
+  "ward": "OKE EGBE II",
+  "otherNames": "Esther Praise",
+  "gender": "Female",
+  "dob": "2025-01-20",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "AKWA IBOM",
+  "lga": "ESIT EKET",
+  "lgaOfEnrollment": "YAGBAWEST",
+  "communityName": "Felele",
+  "residentialAddress": "Adankolo",
+  "presentClass": "JSS 1",
+  "yearOfErollment": "2020",
+  "parentContact": "",
+  "parentOccupation": "Hair Dresser",
+  "parentPhone": "39048509809",
+  "parentName": "Joseph",
+  "parentNin": "340982398",
+  "bankName": "Diamond Bank",
+  "accountNumber": "8798988789",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736268871/admin_passport/ccj26yqraprcgswpoar6.png",
+  "createdBy": {
+    "$oid": "677bd03ce7cabe382e503ab3"
+  },
+  "lastLogged": {
+    "$date": "2025-01-08T01:54:24.899Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T01:54:24.903Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T01:54:24.903Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677ddc89b44b8ebe9b96fa54"
+  },
+  "schoolId": {
+    "$oid": "677b43afe29daf8531d98148"
+  },
+  "surname": "campton",
+  "studentNin": "0980809898",
+  "ward": "ILUKE",
+  "otherNames": "checking",
+  "gender": "Female",
+  "dob": "2025-01-05",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "KOGI",
+  "lga": "AJAOKUTA",
+  "lgaOfEnrollment": "KABBABUNU",
+  "communityName": "Kabba",
+  "residentialAddress": "Lokoja",
+  "presentClass": "JSS 3",
+  "yearOfErollment": "2024",
+  "parentContact": "",
+  "parentOccupation": "Bricklayer",
+  "parentPhone": "0909090889",
+  "parentName": "Alabi Samuel ",
+  "parentNin": "39084598098",
+  "bankName": "Lapo Microfinance Bank",
+  "accountNumber": "2983489790",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736269312/admin_passport/nkz9bwg5yuqvadbegnui.png",
+  "createdBy": {
+    "$oid": "677bd03ce7cabe382e503ab3"
+  },
+  "lastLogged": {
+    "$date": "2025-01-08T02:01:45.063Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T02:01:45.065Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T02:01:45.065Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677ddcefb44b8ebe9b96fa68"
+  },
+  "schoolId": {
+    "$oid": "677b43afe29daf8531d98148"
+  },
+  "surname": "skjfdkjdkjj",
+  "studentNin": "439854081",
+  "ward": "ILUKE",
+  "otherNames": "04980548",
+  "gender": "Female",
+  "dob": "2024-12-29",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "GOMBE",
+  "lga": "BILLIRI",
+  "lgaOfEnrollment": "KABBABUNU",
+  "communityName": "Lokoja",
+  "residentialAddress": "Lokoja",
+  "presentClass": "JSS 1",
+  "yearOfErollment": "2024",
+  "parentContact": "",
+  "parentOccupation": "Trader",
+  "parentPhone": "090909088967",
+  "parentName": "Alabi Samuel",
+  "parentNin": "340982398987",
+  "bankName": "Heritage Bank",
+  "accountNumber": "298348979089",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736269414/admin_passport/nvoqazy1b10movmdhqou.png",
+  "createdBy": {
+    "$oid": "677bd03ce7cabe382e503ab3"
+  },
+  "lastLogged": {
+    "$date": "2025-01-08T02:03:27.601Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T02:03:27.603Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T02:03:27.603Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677deaca941d587be5f90b69"
+  },
+  "schoolId": {
+    "$oid": "677b43afe29daf8531d98182"
+  },
+  "surname": "campton",
+  "studentNin": "03948098090",
+  "ward": "GIRINYA",
+  "otherNames": "checkingas",
+  "gender": "Female",
+  "dob": "2025-01-09",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "EDO",
+  "lga": "IKPOBA OKHA",
+  "lgaOfEnrollment": "KOGI",
+  "communityName": "abia",
+  "residentialAddress": "Adankolo",
+  "presentClass": "JSS 1",
+  "yearOfErollment": "2020",
+  "parentContact": "",
+  "parentOccupation": "Bricklayer",
+  "parentPhone": "0298409834",
+  "parentName": "29342983490",
+  "parentNin": "",
+  "bankName": "Heritage Bank",
+  "accountNumber": "34953495809",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736272961/admin_passport/i7widdtmnh9wuc6r1j6p.png",
+  "createdBy": {
+    "$oid": "677bd03ce7cabe382e503ab3"
+  },
+  "lastLogged": {
+    "$date": "2025-01-08T03:02:34.568Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T03:02:34.571Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T03:02:34.571Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677dead7941d587be5f90b7d"
+  },
+  "schoolId": {
+    "$oid": "677b43afe29daf8531d98182"
+  },
+  "surname": "campton",
+  "studentNin": "03948098090",
+  "ward": "GIRINYA",
+  "otherNames": "checkingas",
+  "gender": "Female",
+  "dob": "2025-01-09",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "EDO",
+  "lga": "IKPOBA OKHA",
+  "lgaOfEnrollment": "KOGI",
+  "communityName": "abia",
+  "residentialAddress": "Adankolo",
+  "presentClass": "JSS 1",
+  "yearOfErollment": "2020",
+  "parentContact": "",
+  "parentOccupation": "Bricklayer",
+  "parentPhone": "0298409834",
+  "parentName": "29342983490",
+  "parentNin": "",
+  "bankName": "Heritage Bank",
+  "accountNumber": "34953495809",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736272975/admin_passport/jj2ycet9lq3yx4nkpbap.png",
+  "createdBy": {
+    "$oid": "677bd03ce7cabe382e503ab3"
+  },
+  "lastLogged": {
+    "$date": "2025-01-08T03:02:47.692Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T03:02:47.693Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T03:02:47.693Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677deb4a941d587be5f90bb1"
+  },
+  "schoolId": {
+    "$oid": "677b43afe29daf8531d98605"
+  },
+  "surname": "buildind",
+  "studentNin": "309590459",
+  "ward": "ABODI/PATESI",
+  "otherNames": "anything",
+  "gender": "Female",
+  "dob": "2024-12-29",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "DELTA",
+  "lga": "ISOKO NORTH",
+  "lgaOfEnrollment": "AJAOKUTA",
+  "communityName": "Kabba",
+  "residentialAddress": "Kogi state",
+  "presentClass": "Primary 6",
+  "yearOfErollment": "2024",
+  "parentContact": "",
+  "parentOccupation": "Clergyman",
+  "parentPhone": "090909088967",
+  "parentName": "29342983490",
+  "parentNin": "340982398",
+  "bankName": "Guaranty Trust Bank",
+  "accountNumber": "8798708978988",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736273090/admin_passport/vpmeaafi6dhw1kyu1g7o.png",
+  "createdBy": {
+    "$oid": "677de8e2941d587be5f90a38"
+  },
+  "lastLogged": {
+    "$date": "2025-01-08T03:04:42.717Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T03:04:42.720Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T03:04:42.720Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677deb66941d587be5f90bbe"
+  },
+  "schoolId": {
+    "$oid": "677b43afe29daf8531d98605"
+  },
+  "surname": "buildind",
+  "studentNin": "309590459",
+  "ward": "ABODI/PATESI",
+  "otherNames": "anything",
+  "gender": "Female",
+  "dob": "2024-12-29",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "DELTA",
+  "lga": "ISOKO NORTH",
+  "lgaOfEnrollment": "AJAOKUTA",
+  "communityName": "Kabba",
+  "residentialAddress": "Kogi state",
+  "presentClass": "Primary 6",
+  "yearOfErollment": "2024",
+  "parentContact": "",
+  "parentOccupation": "Clergyman",
+  "parentPhone": "090909088967",
+  "parentName": "29342983490",
+  "parentNin": "340982398",
+  "bankName": "Guaranty Trust Bank",
+  "accountNumber": "8798708978988",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736273117/admin_passport/m9vf38j63gattynct1lc.png",
+  "createdBy": {
+    "$oid": "677de8e2941d587be5f90a38"
+  },
+  "lastLogged": {
+    "$date": "2025-01-08T03:05:10.239Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T03:05:10.241Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T03:05:10.241Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677debfd941d587be5f90c04"
+  },
+  "schoolId": {
+    "$oid": "677b43afe29daf8531d980ff"
+  },
+  "surname": "Partric",
+  "studentNin": "0234808934",
+  "ward": "IGECHEBA",
+  "otherNames": "ansome",
+  "gender": "Female",
+  "dob": "2025-01-31",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "BORNO",
+  "lga": "GUZAMALA",
+  "lgaOfEnrollment": "IDAH",
+  "communityName": "abia",
+  "residentialAddress": "Lokoja",
+  "presentClass": "JSS 1",
+  "yearOfErollment": "2020",
+  "parentContact": "",
+  "parentOccupation": "Lawyer",
+  "parentPhone": "0298409834",
+  "parentName": "Alabi Samuel",
+  "parentNin": "340982398987",
+  "bankName": "Sterling Bank",
+  "accountNumber": "2983489790",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736273269/admin_passport/o1dtwbh5tksiboubezii.png",
+  "createdBy": {
+    "$oid": "677de94d941d587be5f90a5b"
+  },
+  "lastLogged": {
+    "$date": "2025-01-08T03:07:41.740Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T03:07:41.743Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T03:07:41.743Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e6d04c19fd4c07f221c1d"
+  },
+  "schoolId": {
+    "$oid": "676f4cb12b490484a5fa4186"
+  },
+  "surname": "Testing ",
+  "studentNin": "81898772777",
+  "ward": "ABUGA/OZUJA",
+  "otherNames": "App",
+  "gender": "Female",
+  "dob": "2009-01-08",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "KOGI",
+  "lga": "OKENE",
+  "lgaOfEnrollment": "OKENE",
+  "communityName": "Ozuja",
+  "residentialAddress": "B2/87 Ozuja Okengwe ",
+  "presentClass": "JSS 1",
+  "yearOfErollment": "2024",
+  "parentContact": "",
+  "parentOccupation": "Farmer",
+  "parentPhone": "07031161152",
+  "parentName": "Salihu Adams",
+  "parentNin": "98837773683",
+  "bankName": "",
+  "accountNumber": "",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736338691/admin_passport/byecwpjnivzardyqkwft.jpg",
+  "createdBy": {
+    "$oid": "6775f06f3d98e23298c6e60e"
+  },
+  "lastLogged": {
+    "$date": "2025-01-08T12:18:12.641Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T12:18:12.641Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T12:18:12.641Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677e9048c19fd4c07f22203f"
+  },
+  "schoolId": {
+    "$oid": "677b43afe29daf8531d98303"
+  },
+  "surname": "Testing ",
+  "studentNin": "98765432176",
+  "ward": "LOKOJA - A",
+  "otherNames": "App",
+  "gender": "Female",
+  "dob": "2025-01-01",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "KOGI",
+  "lga": "ADAVI",
+  "lgaOfEnrollment": "LOKOJA",
+  "communityName": "Lokongoma ",
+  "residentialAddress": "Opposite Lokongoma Primary School ",
+  "presentClass": "JSS 1",
+  "yearOfErollment": "2024",
+  "parentContact": "",
+  "parentOccupation": "Trader",
+  "parentPhone": "08077756665",
+  "parentName": "Queen King",
+  "parentNin": "12345678945",
+  "bankName": "",
+  "accountNumber": "",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736347720/admin_passport/ittxhsodlrsvrzrltqhg.jpg",
+  "createdBy": {
+    "$oid": "6775f0683d98e23298c6e5de"
+  },
+  "lastLogged": {
+    "$date": "2025-01-08T14:48:40.934Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-08T14:48:40.935Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-08T14:48:40.935Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677f46efc1fd2170d1d839ec"
+  },
+  "randomId": "6r4VFWo",
+  "schoolId": {
+    "$oid": "677b43afe29daf8531d98304"
+  },
+  "surname": "codebro",
+  "studentNin": "0908988089",
+  "ward": "AVRUGO",
+  "otherNames": "Dammy",
+  "gender": "Female",
+  "dob": "2025-01-05",
+  "nationality": "Nigeria",
+  "stateOfOrigin": "CROSS RIVER",
+  "lga": "AKPABUYO",
+  "lgaOfEnrollment": "IGALAMELAODOLU",
+  "communityName": "Kabba",
+  "residentialAddress": "Owode Kabba, Kogi State",
+  "presentClass": "SSS 1",
+  "yearOfErollment": "2020",
+  "parentContact": "",
+  "parentOccupation": "Bricklayer",
+  "parentPhone": "09137961346",
+  "parentName": "codebro",
+  "parentNin": "9879879874",
+  "parentBvn": "3452232234543",
+  "bankName": "Keystone Bank",
+  "accountNumber": "2095103477",
+  "passport": "https://res.cloudinary.com/dadzk0ffu/image/upload/v1736362085/admin_passport/l3jubheykyvt6tp1qusr.png",
+  "createdBy": {
+    "$oid": "677bd03ce7cabe382e503ab3"
+  },
+  "lastLogged": {
+    "$date": "2025-01-09T03:47:59.193Z"
+  },
+  "createdAt": {
+    "$date": "2025-01-09T03:47:59.206Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-09T03:47:59.206Z"
+  },
+  "__v": 0
+}]
