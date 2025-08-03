@@ -28,7 +28,7 @@ void viewStudentData(int index, BuildContext context) {
                 DataColumn(label: Text('Field')),
                 DataColumn(label: Text('Value')),
               ],
-              source: StudentDataSource(student as Map<String, Object?>),
+              source: StudentDataSource(student),
               rowsPerPage: 10,
             ),
           ),

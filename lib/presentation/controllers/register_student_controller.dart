@@ -529,9 +529,7 @@ class RegisterStudentController extends ChangeNotifier {
     } catch (e) {
       print('Image error: $e');
     } finally {
-      if (rootContext.loaderOverlay.visible) {
-        rootContext.loaderOverlay.hide();
-      }
+      rootContext.loaderOverlay.hide();
     }
   }
 
@@ -572,9 +570,7 @@ class RegisterStudentController extends ChangeNotifier {
     } catch (e) {
       print('Image error: $e');
     } finally {
-      if (rootContext.loaderOverlay.visible) {
-        rootContext.loaderOverlay.hide();
-      }
+      rootContext.loaderOverlay.hide();
     }
   }
 

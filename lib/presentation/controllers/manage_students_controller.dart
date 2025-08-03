@@ -1,8 +1,11 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:facial_attendance/data/models/student_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -119,6 +122,9 @@ class ManageStudentController extends ChangeNotifier {
   String? _selectedSchoolCategory;
   String? _selectedSchoolType;
 
+  Uint8List? _passportImageBytes; // Replace File with Uint8List
+  String? _passportImageName;
+
   TextEditingController _attendanceScoreController = TextEditingController();
 
   final List<String> _disabilityStatusOptions = ['Yes', 'No'];
@@ -160,6 +166,7 @@ class ManageStudentController extends ChangeNotifier {
   String? get selectedLGA => _selectedLGA;
   String? get selectedSchoolCategory => _selectedSchoolCategory;
   String? get selectedSchoolType => _selectedSchoolType;
+  Uint8List? get passportImageBytes => _passportImageBytes;
 
   ScrollController get scrollController => _scrollController;
   TextEditingController get attendanceScoreController =>
@@ -208,6 +215,11 @@ class ManageStudentController extends ChangeNotifier {
 
   void setPassportImage(File value) {
     _passportImage = value;
+    notifyListeners();
+  }
+
+  void setPassportImageBytes(Uint8List? bytes) {
+    _passportImageBytes = bytes;
     notifyListeners();
   }
 
@@ -668,6 +680,77 @@ class ManageStudentController extends ChangeNotifier {
       if (await file.exists()) {
         await file.delete();
       }
+    }
+  }
+
+  Future<void> pickImgFromGallery(
+      BuildContext dialogContext, BuildContext rootContext) async {
+    Navigator.of(dialogContext).pop();
+
+    try {
+      final pickedFile =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
+      rootContext.loaderOverlay.show();
+      if (pickedFile == null) return;
+
+      final originalBytes = await pickedFile.readAsBytes();
+      final image = img.decodeImage(originalBytes);
+
+      if (image != null) {
+        final cropped = img.copyResize(image, width: 200, height: 200);
+        final croppedBytes = Uint8List.fromList(img.encodeJpg(cropped));
+
+        _passportImageBytes = croppedBytes;
+        _passportImageName =
+            'passport_${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(1000)}.jpg';
+
+        if (!kIsWeb) {
+          final directory = await getApplicationDocumentsDirectory();
+          final file = File('${directory.path}/$_passportImageName');
+          await file.writeAsBytes(croppedBytes);
+        }
+        notifyListeners();
+      }
+    } catch (e) {
+      print('Gallery image error: $e');
+    } finally {
+      rootContext.loaderOverlay.hide();
+    }
+  }
+
+  Future<void> takeNewPhoto(
+      BuildContext dialogContext, BuildContext rootContext) async {
+    Navigator.of(dialogContext).pop();
+
+    try {
+      final pickedFile =
+          await ImagePicker().pickImage(source: ImageSource.camera);
+      rootContext.loaderOverlay.show();
+      if (pickedFile == null) return;
+
+      final originalBytes = await pickedFile.readAsBytes();
+      final image = img.decodeImage(originalBytes);
+
+      if (image != null) {
+        final cropped = img.copyResize(image, width: 200, height: 200);
+        final croppedBytes = Uint8List.fromList(img.encodeJpg(cropped));
+
+        _passportImageBytes = croppedBytes;
+        _passportImageName =
+            'passport_${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(1000)}.jpg';
+
+        if (!kIsWeb) {
+          final directory = await getApplicationDocumentsDirectory();
+          final file = File('${directory.path}/$_passportImageName');
+          await file.writeAsBytes(croppedBytes);
+        }
+
+        notifyListeners();
+      }
+    } catch (e) {
+      print('Camera image error: $e');
+    } finally {
+      rootContext.loaderOverlay.hide();
     }
   }
 

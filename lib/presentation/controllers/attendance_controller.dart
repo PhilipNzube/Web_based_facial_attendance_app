@@ -80,43 +80,11 @@ class AttendanceController extends ChangeNotifier {
         ),
       );
 
-      String? outputPath;
-      try {
-        outputPath = await FilePicker.platform.getDirectoryPath();
-      } catch (e) {
-        print('FilePicker error: $e');
-      }
-
-      if (outputPath == null) {
-        if (Platform.isAndroid) {
-          var status = await Permission.storage.request();
-          if (!status.isGranted) {
-            CustomSnackbar.show(
-              context,
-              'Storage permission required to save PDF.',
-            );
-
-            return;
-          }
-          final directory = Directory('/storage/emulated/0/Download');
-          outputPath = directory.path;
-        } else {
-          final directory = await getApplicationDocumentsDirectory();
-          outputPath = directory.path;
-        }
-      }
-
-      final file = File('$outputPath/attendance.pdf');
-      await file.writeAsBytes(await pdf.save());
-
-      if (await file.exists()) {
-        CustomSnackbar.show(
-          context,
-          'PDF saved at $outputPath/attendance.pdf',
-        );
-      } else {
-        CustomSnackbar.show(context, 'Failed to save PDF.', isError: true);
-      }
+      // ✅ Share PDF across all platforms (including web)
+      await Printing.sharePdf(
+        bytes: await pdf.save(),
+        filename: 'attendance.pdf',
+      );
     } catch (e) {
       print('Error generating PDF: $e');
       CustomSnackbar.show(context, 'Error generating PDF', isError: true);

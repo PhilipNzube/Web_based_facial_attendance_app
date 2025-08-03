@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -118,7 +119,7 @@ void editStudentDialog(int index, BuildContext context) async {
   String? _selectedLgaOfEnrollment = student.lgaOfEnrollment;
   String? _selectedPresentLevel = student.presentLevel;
   String? _selectedDepartment = student.department;
-  int? _selectedYearOfEnrollment = int.parse(student.yearOfEnrollment!);
+  String? _selectedYearOfEnrollment = student.yearOfEnrollment;
   String? _selectedParentOccupation = student.parentOccupation;
   String? _selectedBank = student.bankName;
   String? _selectedDisabilityStatus = 'No';
@@ -248,196 +249,105 @@ void editStudentDialog(int index, BuildContext context) async {
                             },
                           ),
                           const Gap(10),
-                          GestureDetector(
-                            onTap: () async {
-                              await showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  title: Text('Upload Passport Photo'),
-                                  content: Text('Please select an option'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () async {
-                                        final pickedFile =
-                                            await ImagePicker().pickImage(
-                                          source: ImageSource.gallery,
-                                        );
-                                        if (pickedFile != null) {
-                                          final originalImage = img.decodeImage(
-                                            File(pickedFile.path)
-                                                .readAsBytesSync(),
-                                          );
-
-                                          if (originalImage != null) {
-                                            final croppedImage =
-                                                img.copyResizeCropSquare(
-                                                    originalImage,
-                                                    size: 200);
-
-                                            final randomDigit =
-                                                Random().nextInt(10).toString();
-                                            final newFileName =
-                                                'passport_${randomDigit}_${DateTime.now().millisecondsSinceEpoch}.jpg';
-                                            final directory =
-                                                await getApplicationDocumentsDirectory();
-                                            final newFile = File(
-                                                '${directory.path}/$newFileName');
-
-                                            await newFile.writeAsBytes(
-                                                img.encodeJpg(croppedImage));
-
-                                            setState(() {
-                                              Provider.of<ManageStudentController>(
-                                                      context,
-                                                      listen: false)
-                                                  .setPassportImage(newFile);
-                                              student.passport = newFile.path;
-                                            });
-
-                                            print(
-                                                'Image cropped and saved to: ${newFile.path}');
-                                          }
-                                        }
-
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Select from Gallery'),
+                          Consumer<ManageStudentController>(
+                            builder: (context, controller, child) {
+                              return GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (dialogContext) => AlertDialog(
+                                      title:
+                                          const Text('Upload Passport Photo'),
+                                      content:
+                                          const Text('Please select an option'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            controller.pickImgFromGallery(
+                                                dialogContext, context);
+                                          },
+                                          child:
+                                              const Text('Select from Gallery'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            controller.takeNewPhoto(
+                                                dialogContext, context);
+                                          },
+                                          child: const Text('Take a New Photo'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(dialogContext).pop();
+                                          },
+                                          child: const Text('Cancel'),
+                                        ),
+                                      ],
                                     ),
-                                    TextButton(
-                                      onPressed: () async {
-                                        final pickedFile =
-                                            await ImagePicker().pickImage(
-                                          source: ImageSource.camera,
-                                        );
-                                        if (pickedFile != null) {
-                                          final originalImage = img.decodeImage(
-                                            File(pickedFile.path)
-                                                .readAsBytesSync(),
-                                          );
-
-                                          if (originalImage != null) {
-                                            final croppedImage =
-                                                img.copyResizeCropSquare(
-                                                    originalImage,
-                                                    size: 200);
-
-                                            final randomDigit =
-                                                Random().nextInt(10).toString();
-                                            final newFileName =
-                                                'passport_${randomDigit}_${DateTime.now().millisecondsSinceEpoch}.jpg';
-                                            final directory =
-                                                await getApplicationDocumentsDirectory();
-                                            final newFile = File(
-                                                '${directory.path}/$newFileName');
-
-                                            await newFile.writeAsBytes(
-                                                img.encodeJpg(croppedImage));
-
-                                            setState(() {
-                                              Provider.of<ManageStudentController>(
-                                                      context,
-                                                      listen: false)
-                                                  .setPassportImage(newFile);
-                                              student.passport = newFile.path;
-                                            });
-
-                                            print(
-                                                'Image cropped and saved to: ${newFile.path}');
-                                          }
-                                        }
-
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Take a New Photo'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Cancel'),
-                                    ),
-                                  ],
+                                  );
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 180,
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      if (controller.passportImageBytes ==
+                                          null) ...[
+                                        const Icon(Icons.photo,
+                                            size: 50, color: Colors.grey),
+                                        const SizedBox(height: 10),
+                                        const Text(
+                                          'Upload Passport Photo',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ] else ...[
+                                        SizedBox(
+                                          height: 80,
+                                          width: 80,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            child: Image.memory(
+                                              controller.passportImageBytes!,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        const Text(
+                                          'Passport photo uploaded',
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.green),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            controller
+                                                .setPassportImageBytes(null);
+                                            student.passport = '';
+                                          },
+                                          child: const Text(
+                                            'Delete Passport',
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                        ),
+                                      ],
+                                    ],
+                                  ),
                                 ),
                               );
                             },
-                            child: Container(
-                              width: double.infinity,
-                              height: 180,
-                              margin: const EdgeInsets.symmetric(vertical: 10),
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  if (Provider.of<ManageStudentController>(
-                                          context,
-                                          listen: false)
-                                      .passportImage
-                                      .path
-                                      .isEmpty) ...[
-                                    const Icon(Icons.photo,
-                                        size: 50, color: Colors.grey),
-                                    const Gap(10),
-                                    const Text(
-                                      'Upload Passport Photo',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ] else ...[
-                                    // Image preview
-                                    Container(
-                                      width: 80,
-                                      height: 80,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(color: Colors.grey),
-                                        image: DecorationImage(
-                                          image: FileImage(Provider.of<
-                                                      ManageStudentController>(
-                                                  context,
-                                                  listen: false)
-                                              .passportImage),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    const Gap(8),
-
-                                    // Confirmation text
-                                    const Text(
-                                      'Passport photo uploaded',
-                                      style: TextStyle(
-                                          fontSize: 14, color: Colors.green),
-                                      textAlign: TextAlign.center,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const Gap(6),
-
-                                    // Delete button
-                                    TextButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          Provider.of<ManageStudentController>(
-                                                  context,
-                                                  listen: false)
-                                              .setPassportImage(File(''));
-                                          student.passport = '';
-                                        });
-                                      },
-                                      child: const Text(
-                                        'Delete Passport',
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    ),
-                                  ],
-                                ],
-                              ),
-                            ),
                           ),
                         ],
                       ),
@@ -459,7 +369,7 @@ void editStudentDialog(int index, BuildContext context) async {
                             context,
                             listen: false);
 
-                        if (controller.passportImage.path.isEmpty) {
+                        if (controller.passportImageBytes == null) {
                           CustomSnackbar.show(
                             context,
                             'Please upload a passport photo',
@@ -471,6 +381,8 @@ void editStudentDialog(int index, BuildContext context) async {
                         final studentBox =
                             await Hive.openBox<Student>('students');
                         final student = controller.students[index];
+                        final base64Passport =
+                            base64Encode(controller.passportImageBytes!);
 
                         // Update student object fields
                         student.surname = surnameController.text;
@@ -478,6 +390,7 @@ void editStudentDialog(int index, BuildContext context) async {
                         student.middlename = _middleNameController.text;
                         student.presentLevel = _selectedPresentLevel!;
                         student.department = _selectedDepartment!;
+                        student.passport = base64Passport;
                         student.status = 0;
                         // You can also update passport/cloudinaryUrl if changed:
                         // student.passport = updatedPassport;
