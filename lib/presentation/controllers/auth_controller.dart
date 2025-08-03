@@ -42,34 +42,25 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<void> login(
-      String email, String passcode, BuildContext context) async {
+    String email,
+    String passcode,
+    BuildContext context,
+  ) async {
     String? savedEmail = await _authRepository.storage.read(key: 'email');
     String? savedPasscode = await _authRepository.storage.read(key: 'passcode');
 
     if (savedPasscode != null && passcode != savedPasscode) {
-      CustomSnackbar.show(
-        context,
-        'Password does not match.',
-        isError: true,
-      );
+      CustomSnackbar.show(context, 'Password does not match.', isError: true);
       return;
     }
 
     if (savedEmail != null && email != savedEmail) {
-      CustomSnackbar.show(
-        context,
-        'Email does not match.',
-        isError: true,
-      );
+      CustomSnackbar.show(context, 'Email does not match.', isError: true);
       return;
     }
 
     if (email.isEmpty) {
-      CustomSnackbar.show(
-        context,
-        'Email field is required.',
-        isError: true,
-      );
+      CustomSnackbar.show(context, 'Email field is required.', isError: true);
       return;
     }
 
@@ -96,13 +87,11 @@ class AuthController extends ChangeNotifier {
 
     // If email and passcode match the saved ones, welcome the user back
     if (savedEmail == email && savedPasscode == passcode) {
-      String? savedFullName =
-          await _authRepository.storage.read(key: 'fullName');
+      String? savedFullName = await _authRepository.storage.read(
+        key: 'fullName',
+      );
       if (savedFullName != null) {
-        CustomSnackbar.show(
-          context,
-          'Welcome back, $savedFullName!',
-        );
+        CustomSnackbar.show(context, 'Welcome back, $savedFullName!');
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -124,8 +113,9 @@ class AuthController extends ChangeNotifier {
       if (savedPasscode == null || savedPasscode != passcode) {
         try {
           // Connect to the database
-          var db = await mongo.Db.create(
-              'mongodb+srv://brainpalscodeacademy:%40Meprosper12@kogiagile.zjolb.mongodb.net/KOGI_AGILE_DB_TEST?retryWrites=true&w=majority');
+          // var db = await mongo.Db.create(
+          //     'mongodb+srv://brainpalscodeacademy:%40Meprosper12@kogiagile.zjolb.mongodb.net/KOGI_AGILE_DB_TEST?retryWrites=true&w=majority');
+          var db = await mongo.Db.create('');
           await db.open();
           print('Connected to the database.');
 
@@ -158,16 +148,11 @@ class AuthController extends ChangeNotifier {
               await storage.write(key: 'fullName', value: fullName);
               await storage.write(key: 'id', value: id);
 
-              CustomSnackbar.show(
-                context,
-                'Welcome back $fullName!',
-              );
+              CustomSnackbar.show(context, 'Welcome back $fullName!');
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MainApp(
-                    key: UniqueKey(),
-                  ),
+                  builder: (context) => MainApp(key: UniqueKey()),
                 ),
               );
             } else {
@@ -192,11 +177,7 @@ class AuthController extends ChangeNotifier {
           // Print the error and the stack trace
           print('An error occurred: $e');
           print('Stack trace: $stacktrace');
-          CustomSnackbar.show(
-            context,
-            'An error occurred',
-            isError: true,
-          );
+          CustomSnackbar.show(context, 'An error occurred', isError: true);
         } finally {
           isLoading = false;
           notifyListeners();
@@ -227,8 +208,11 @@ class AuthController extends ChangeNotifier {
         ),
       );
     } else {
-      CustomSnackbar.show(context, "Biometric authentication failed",
-          isError: true);
+      CustomSnackbar.show(
+        context,
+        "Biometric authentication failed",
+        isError: true,
+      );
     }
   }
 }
