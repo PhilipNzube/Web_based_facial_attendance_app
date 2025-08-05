@@ -1,4 +1,5 @@
 import 'package:facial_attendance/data/models/student_model.dart';
+import 'package:facial_attendance/presentation/screens/Auth/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -75,13 +76,15 @@ class HomeController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> logout(BuildContext context) async {
-    try {
-      if (context.mounted) {
-        Navigator.pushReplacementNamed(context, "/login");
-      }
-    } catch (e) {
-      print("Logout error: $e");
-    }
+  void logout(BuildContext context) async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginPage(
+          key: UniqueKey(),
+        ),
+      ),
+    );
+    print("Logout");
   }
 }

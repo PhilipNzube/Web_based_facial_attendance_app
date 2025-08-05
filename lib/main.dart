@@ -91,8 +91,8 @@ class MyApp extends StatelessWidget {
               darkTheme: AppTheme.darkTheme,
               themeMode:
                   themeController.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-              // home: isLoggedIn ? const MainApp() : LoginPage(),
-              home: const MainApp(),
+              home: isLoggedIn ? const MainApp() : LoginPage(),
+              //home: const MainApp(),
             ),
           );
         },

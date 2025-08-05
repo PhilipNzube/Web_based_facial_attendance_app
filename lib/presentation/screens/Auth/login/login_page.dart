@@ -35,13 +35,13 @@ class LoginPage extends StatelessWidget {
                     children: [
                       Gap(MediaQuery.of(context).size.height * 0.05,
                           useMediaQuery: false),
-                      Image.asset(
-                        "images/portal-landing-logo.png",
-                        fit: BoxFit.contain,
-                        width: 120,
-                      ),
-                      Gap(MediaQuery.of(context).size.height * 0.03,
-                          useMediaQuery: false),
+                      // Image.asset(
+                      //   "images/portal-landing-logo.png",
+                      //   fit: BoxFit.contain,
+                      //   width: 120,
+                      // ),
+                      // Gap(MediaQuery.of(context).size.height * 0.03,
+                      //     useMediaQuery: false),
                       const Text(
                         'Login',
                         style: TextStyle(
@@ -57,7 +57,8 @@ class LoginPage extends StatelessWidget {
                         passcodeController: authController.passcodeController,
                         emailFocusNode: authController.emailFocusNode,
                         isLoading: authController.isLoading,
-                        showFingerprint: authController.showFingerprint,
+                        showFingerprint: false,
+                        //showFingerprint: authController.showFingerprint,
                         onSubmit: () => authController.login(
                           authController.emailController.text.trim(),
                           authController.passcodeController.text.trim(),
@@ -65,24 +66,6 @@ class LoginPage extends StatelessWidget {
                         ),
                         onFingerprintLogin: () =>
                             authController.biometricLogin(context),
-                      ),
-                      Gap(MediaQuery.of(context).size.height * 0.03,
-                          useMediaQuery: false),
-                      const Text(
-                        'POWERED BY',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Text(
-                        'KOGI STATE MINISTRY OF EDUCATION',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.bold,
-                        ),
                       ),
                       Gap(MediaQuery.of(context).size.height * 0.03,
                           useMediaQuery: false),

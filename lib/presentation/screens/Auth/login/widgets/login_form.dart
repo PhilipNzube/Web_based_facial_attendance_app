@@ -73,7 +73,7 @@ class LoginForm extends StatelessWidget {
             controller: passcodeController,
             style: const TextStyle(fontSize: 16.0),
             decoration: InputDecoration(
-              labelText: 'Passcode',
+              labelText: 'Password',
               labelStyle: const TextStyle(
                 color: Colors.grey,
                 fontFamily: 'Inter',
