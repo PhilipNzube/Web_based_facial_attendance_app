@@ -91,6 +91,8 @@ class AuthController extends ChangeNotifier {
         ),
       ),
     );
+    isLoading = false;
+    notifyListeners();
   }
 
   Future<void> biometricLogin(BuildContext context) async {

@@ -44,14 +44,13 @@ void showLogoutDialog(
                               backgroundColor: Colors.red),
                           onPressed: () async {
                             setState(() => isLoading = true);
-
                             try {
                               onLogout(context);
                             } catch (e) {
                               print("Logout failed: $e");
                             } finally {
                               if (dialogContext.mounted) {
-                                Navigator.of(dialogContext).pop();
+                                //Navigator.of(dialogContext).pop();
                               }
                             }
                           },
