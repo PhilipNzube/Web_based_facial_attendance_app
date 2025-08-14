@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:facial_attendance/data/models/student_model.dart';
@@ -435,9 +436,8 @@ class ManageStudentController extends ChangeNotifier {
   //   return existingRecords.isNotEmpty;
   // }
 
-  Future<String?> uploadImageToS3(
-      String imagePath, String fileName, BuildContext context) async {
-    final File imageFile = File(imagePath);
+  Future<String?> uploadImageToS3Bytes(
+      Uint8List imageBytes, String fileName, BuildContext context) async {
     final Uri uploadUrl = Uri.parse(
         "https://student-face-match-storage.s3.us-east-1.amazonaws.com/$fileName");
 
@@ -446,32 +446,18 @@ class ManageStudentController extends ChangeNotifier {
       print("Checking network connectivity...");
       if (connectivityResult == ConnectivityResult.none) {
         print("No internet connection detected!");
-
         CustomSnackbar.show(
             context, 'No internet connection. Please check your network.',
             isError: true);
         return null;
       }
-      // Fetch AWS credentials (either from secure storage or Secrets Manager)
-      // final credentials = await MyAWSCredentials.fetchCredentials();
-      // final accessKey = credentials['AWSAccessKeyId'];
-      // final secretKey = credentials['AWSSecretKey'];
-
-      // final response = await http.put(
-      //   uploadUrl,
-      //   body: imageFile.readAsBytesSync(),
-      //   headers: {
-      //     "Content-Type": "image/jpeg",
-      //     "AWSAccessKeyId": accessKey!,
-      //     "AWSSecretKey": secretKey!,
-      //   },
-      // );
+      // print(
+      //     "Accesskey:${MyAWSCredentials.accessKey}, Secretkey: ${MyAWSCredentials.secretKey}");
 
       final response = await http.put(
         uploadUrl,
-        body: imageFile.readAsBytesSync(),
+        body: imageBytes, // ✅ Directly send bytes
         headers: {
-          //"x-amz-acl": "public-read",
           "Content-Type": "image/jpeg",
           "AWSAccessKeyId": MyAWSCredentials.accessKey,
           "AWSSecretKey": MyAWSCredentials.secretKey,
@@ -480,8 +466,7 @@ class ManageStudentController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         print("Upload successful: ${uploadUrl.toString()}");
-
-        return uploadUrl.toString(); // Return S3 URL
+        return uploadUrl.toString();
       } else {
         print("Upload failed: ${response.body}");
         throw Exception(
@@ -493,25 +478,18 @@ class ManageStudentController extends ChangeNotifier {
     }
   }
 
-  Future<File> resizeImage(File imageFile,
-      {int width = 600, int height = 800}) async {
-    img.Image? image = img.decodeImage(imageFile.readAsBytesSync());
+  Future<Uint8List> resizeImageWeb(
+    Uint8List imageBytes, {
+    int width = 600,
+    int height = 800,
+  }) async {
+    img.Image? image = img.decodeImage(imageBytes);
+    if (image == null) {
+      throw Exception("Could not decode image from bytes.");
+    }
 
-    // Resize image
-    if (image == null) return imageFile;
-
-    final totalPixels = image.width * image.height;
-    int resizedPixels = 0;
-    final resizedImage = img.copyResize(image, width: width, height: height);
-
-    // Write the resized image back to file
-    final resizedImageFile =
-        await File(imageFile.path).writeAsBytes(img.encodeJpg(resizedImage));
-    return resizedImageFile;
-  }
-
-  String getAmzDate() {
-    return '${DateTime.now().toUtc().toIso8601String().replaceAll(RegExp(r'[:-]'), '').split('.').first}Z';
+    img.Image resized = img.copyResize(image, width: width, height: height);
+    return Uint8List.fromList(img.encodeJpg(resized));
   }
 
   void verifyStudent(int index, BuildContext context) async {
@@ -522,7 +500,7 @@ class ManageStudentController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final student = _students[index]; // assume _students is List<Student>
+      final student = _students[index];
       final randomId = student.randomId;
 
       // Get passport image from Hive DB
@@ -532,8 +510,8 @@ class ManageStudentController extends ChangeNotifier {
         orElse: () => throw Exception("Student not found"),
       );
 
-      final passportImagePath = studentData.passport;
-      if (passportImagePath.isEmpty) {
+      final passportImageBase64 = studentData.passport;
+      if (passportImageBase64.isEmpty) {
         CustomSnackbar.show(context, 'Passport image not found!',
             isError: true);
         return;
@@ -546,16 +524,20 @@ class ManageStudentController extends ChangeNotifier {
         CustomSnackbar.show(context, 'No image captured!', isError: true);
         return;
       }
-      final newImagePath = pickedFile.path;
 
-      File resizedPassportImage = await resizeImage(File(passportImagePath));
-      File resizedNewImage = await resizeImage(File(newImagePath));
+      Uint8List passportBytes = base64Decode(passportImageBase64);
+      Uint8List resizedPassportBytes = await resizeImageWeb(passportBytes);
+
+      Uint8List newImageBytes = await pickedFile.readAsBytes();
+      Uint8List resizedNewImageBytes = await resizeImageWeb(newImageBytes);
+
+      print("Started!!");
 
       // Upload images
-      final passportUrl = await uploadImageToS3(
-          resizedPassportImage.path, "passport.jpg", context);
-      final newImageUrl =
-          await uploadImageToS3(resizedNewImage.path, "new_photo.jpg", context);
+      final passportUrl = await uploadImageToS3Bytes(
+          resizedPassportBytes, "passport.jpg", context);
+      final newImageUrl = await uploadImageToS3Bytes(
+          resizedNewImageBytes, "new_photo.jpg", context);
 
       _updateUploadProgress(50.0, "uploaded");
       if (passportUrl == null || newImageUrl == null) {
@@ -571,15 +553,10 @@ class ManageStudentController extends ChangeNotifier {
       if (isMatch) {
         studentData.status = 1;
         await studentData.save();
-
-        await loadStudents(); // Make sure this loads from Hive now
-        //sendSingleStudentAttendance(index, context);
-      } else {
-        // Faces do not match
+        await loadStudents(); // Reload from Hive
       }
     } catch (e) {
       print("Error: $e");
-      //CustomSnackbar.show(context, "Error: $e", isError: true);
     } finally {
       Navigator.of(navigatorKey.currentContext!).pop();
       _isLoading = false;
@@ -590,10 +567,8 @@ class ManageStudentController extends ChangeNotifier {
   Future<bool> compareFacesAWS(
       BuildContext context, String sourceImage, String targetImage) async {
     try {
-      final repository =
-          FaceRecognitionRepository(); // ✅ Instantiate Repository
-      bool isMatch = await repository.compareFacesAWS(
-          sourceImage, targetImage); // ✅ Call instance method
+      final repository = FaceRecognitionRepository();
+      bool isMatch = await repository.compareFacesAWS(sourceImage, targetImage);
 
       CustomSnackbar.show(
         context,
@@ -601,10 +576,10 @@ class ManageStudentController extends ChangeNotifier {
         isError: !isMatch,
       );
 
-      return isMatch; // ✅ Ensure function returns a bool
+      return isMatch;
     } catch (e) {
       CustomSnackbar.show(context, e.toString(), isError: true);
-      return false; // ✅ Return a default value to avoid the error
+      return false;
     }
   }
 
